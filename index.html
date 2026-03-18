@@ -51,7 +51,7 @@
     .hero-inner { position: relative; z-index: 2; max-width: 820px; }
     .hero-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.78); border: 1px solid var(--pink-mid); border-radius: 100px; padding: .42rem 1.2rem; font-size: .76rem; color: var(--pink-deep); letter-spacing: .09em; text-transform: uppercase; margin-bottom: 2rem; animation: fadeUp .7s ease both; font-weight: 600; }
     .hero-pill::before { content: '✦'; font-size: .65rem; }
-    .hero-name { font-family: var(--serif-d); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; color: var(--charcoal); letter-spacing: .01em; line-height: 1.05; margin-bottom: .3rem; animation: fadeUp .7s .1s ease both; }
+    .hero-name { font-family: var(--serif-d); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; color: var(--charcoal); letter-spacing: .01em; line-height: 1.05; margin-bottom: .3rem; animation: fadeUp .7s .1s ease both; }
     .hero-title-line { font-family: var(--sans); font-size: clamp(.9rem, 1.5vw, 1.1rem); font-weight: 600; color: var(--pink-hot); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 1.8rem; animation: fadeUp .7s .2s ease both; }
     .hero-headline { font-family: var(--serif-d); font-size: clamp(3.2rem, 7.5vw, 6rem); font-weight: 800; line-height: 1.05; color: var(--charcoal); animation: fadeUp .7s .18s ease both; }
     .hero-headline em { font-style: italic; color: var(--pink-hot); }
@@ -136,9 +136,9 @@
     .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
     /* QUOTE */
-    #quote { background: var(--charcoal-2); text-align: center; padding: 6rem 2rem; }
+    #quote { background: var(--charcoal-2); text-align: center; padding: 3rem 2rem; }
     .quote-mark { font-family: var(--serif-d); font-size: 7rem; color: var(--pink-hot); line-height: .5; opacity: .28; margin-bottom: 1.2rem; }
-    .quote-text { font-family: var(--serif-d); font-size: clamp(1.8rem, 3.8vw, 2.8rem); font-weight: 700; font-style: italic; color: var(--white); max-width: 700px; margin: 0 auto; line-height: 1.45; }
+    .quote-text { font-family: var(--serif-d); font-size: clamp(1.2rem, 2.2vw, 1.8rem); font-weight: 700; font-style: italic; color: var(--white); max-width: 700px; margin: 0 auto; line-height: 1.45; }
     .quote-text em { color: var(--pink-mid); font-style: normal; }
 
     /* FOOTER */
@@ -216,7 +216,8 @@
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="about-inner reveal">
+  <div class="about-inner reveal">
+      <img src="sticker.png" alt="" style="width:160px;margin:0 auto 1.5rem;display:block;filter:drop-shadow(0 8px 24px rgba(232,69,122,.18));" />
       <div class="section-label">About Me</div>
       <h2 class="section-title" style="text-align:center;">The human behind<br>the <em>words</em></h2>
       <div class="about-body">
@@ -398,7 +399,7 @@
           <div class="work-card-top" style="background:linear-gradient(135deg,#f4a7c0,var(--pink-hot));">
             <div class="work-card-num">03</div>
             <div class="work-card-tag">Musings</div>
-            <div class="work-card-client" style="color:var(--white);">Make Me Your Radio</div>
+            <div class="work-card-client">Make Me Your Radio</div>
             <div class="work-card-service" style="color:rgba(255,255,255,.7);">2024 · ForeverBoundless</div>
           </div>
           <div class="work-card-body">
@@ -461,7 +462,7 @@
     <div class="footer-made">Made with <span class="heart">♥</span> and lots of coffee</div>
   </footer>
 
-  <script>
+ <script>
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursor-ring');
     document.addEventListener('mousemove', e => {
@@ -476,6 +477,16 @@
       entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
     }, { threshold: .1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // sparkle trail
+    document.addEventListener('mousemove', e => {
+      const s = document.createElement('div');
+      s.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:6px;height:6px;pointer-events:none;z-index:9997;transform:translate(-50%,-50%) scale(1);opacity:1;transition:transform .6s ease,opacity .6s ease`;
+      s.innerHTML = `<svg width="10" height="10" viewBox="0 0 28 28" fill="none"><path d="M14 0L15.5 12.5L28 14L15.5 15.5L14 28L12.5 15.5L0 14L12.5 12.5L14 0Z" fill="#e8457a"/></svg>`;
+      document.body.appendChild(s);
+      setTimeout(() => { s.style.transform = 'translate(-50%,-50%) scale(0)'; s.style.opacity = '0'; }, 50);
+      setTimeout(() => s.remove(), 650);
+    });
   </script>
 </body>
 </html>
